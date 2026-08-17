@@ -18,5 +18,4 @@ README.md - this README
 3. All hand-written solutions must be stored under `solutions/` folder
 4. Every PR must contain `description` with explanation what is done in this PR
 
-> That's not the final version of the README.md, check back for updates
-~WIP~
+> That's not the final version of the README.md, check back for updates *WIP*
