@@ -19,6 +19,8 @@ README.md - this README
 2. No code (except for examples) should be presented in folder tasks
 3. All hand-written solutions must be stored under `solutions/` folder
 4. Every PR must contain `description` with explanation what is done in this PR
+5. Every task must match its solution, folder names must match each other
+6. Every solution must be independents and contain it's own requirements.txt
 
 ## Workflow
 
