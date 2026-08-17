@@ -4,12 +4,14 @@ This repository was created to walk through the basics of production development
 
 ## Repository structure
 
+```
 tasks/ - all tasks stored here
 |-00-task/ - nn-task folder with task description and requirements
 solutions/ - all solutions for tasks stored here
 |-00-task/ - nn-task folder with task solution
 README.md - this README
 .gitignore - files that should be ignored by git
+```
 
 ## Repository rules
 
