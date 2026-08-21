@@ -42,3 +42,11 @@ library> find book1
 book1 found
 ```
 
+## UPDATE 21.08.26
+
+1. Save data to json file so program can survive restart
+2. Several users may borrow books
+3. Several books with same name
+4. User may borrow no more than 3 books
+5. Books import/export
+6. Split program into modules
