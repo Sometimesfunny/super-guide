@@ -1,12 +1,9 @@
-# TODO: Help
-
- 
 from dataclasses import dataclass
 import json
-from user import User
+from models.user import User
 from library import Library, library1
-from loan import Loan
-from book import Book
+from models.loan import Loan
+from models.book import Book
 
 library1.save_load()
         
