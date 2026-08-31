@@ -3,11 +3,11 @@
  
 from dataclasses import dataclass
 import json
+from user import User
+from library import Library, library1
+from loan import Loan
+from book import Book
 
-from classUser import *
-from classLibrary import *
-from classLoan import *
-from classBook import *
 
 use = User('olek')
 library1.save_load()
@@ -63,13 +63,13 @@ while True:
         borrow <book name>: borrow book from the library
         return <book name>: return book to the library
         find <book name>: check if book is in the library
-        import <file name>: import books from file
-        export <file name>: export books from file
+        import <file name>: import books from file to the library
+        export <file name>: export books to file from the library 
         exit: end of program
         ''')    
     else:
         print('unknown command')
-    library1.savedata()
+    library1.save_data()
     
         
     
