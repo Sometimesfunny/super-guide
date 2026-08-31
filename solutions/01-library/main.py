@@ -1,76 +1,17 @@
-# FIX: we can return book twice
-# FIX: no empty input allowed
-# FIX: No library> input string
-# TODO: Help
-
 from dataclasses import dataclass
+import json
+from models.user import User
+from library import Library, library1
+from models.loan import Loan
+from models.book import Book
 
-@dataclass(unsafe_hash=True)
-class User: 
-    name: str
-
-class Library:
-    def __init__(self):
-        self.book_set: set[Book] = set()
-        self.loans: set[Loan] = set()
-
-    def book_list(self):
-        print(*self.book_set, sep = ', ')
-
-    def find_book(self, book_name: str):
-        if book_name in [x.name for x in self.book_set]:
-            print(book_name, 'found') 
-        else:
-            print(book_name, 'not found')
-
-    def add_book(self, book: Book):
-        self.book_set.add(book)
-        print('Book', book.name, 'added')
-
-    def borrow_book(self, name: str, book_name: str):
-        if book_name in [x.book_name for x in self.loans]:
-            print('someone already have this book')
-            return
-        elif book_name not in [x.name for x in self.book_set]:
-            print('there is no this book in library')
-            return
-        else:
-            new_loan = Loan(
-                name=name,
-                book_name=book_name
-            )
-            self.loans.add(new_loan)
-            print(book_name, 'successfully borrowed') 
+library1.save_load()
         
-    def return_book(self, name: str, book_name: str):
-        loan_to_remove = None
-        for loan in self.loans:
-            if loan.name == name and loan.book_name == book_name:
-                loan_to_remove = loan
-                break
-        else:
-            print('no loan for this name and book found')
-            return
-        self.loans.remove(loan_to_remove)
-        print(book_name, 'successfully returned') 
-
-@dataclass(unsafe_hash=True)
-class Book:
-    name: str
-
-@dataclass(unsafe_hash=True)
-class Loan:
-    name: str
-    book_name: str
-
-use = User('ivan')
-
-library1=Library()
-
 while True:
     input_text = input('library> ').split()
     if len(input_text) == 0:
         continue
+        
     if input_text[0] == 'list':
         library1.book_list()
     elif input_text[0] == 'add-book':
@@ -79,27 +20,51 @@ while True:
             continue
         book_ = Book(input_text[1])
         library1.add_book(book_)
+        print('book', input_text[1], 'added')
+        
     elif input_text[0] == 'borrow':
         if len(input_text) != 2:
             print('usage: borrow <book_name>')
             continue
-        library1.borrow_book(use.name, input_text[1])
+        library1.borrow_book(input('on who register book? ').strip().lower(), input_text[1])
     elif input_text[0] == 'return':
         if len(input_text) != 2:
             print('usage: return <book_name>')
             continue
-        library1.return_book(use.name, input_text[1])
+        library1.return_book(input('on who register book? ').strip().lower(), input_text[1])
     elif input_text[0] == 'find':
         if len(input_text) != 2:
             print('usage: find <book_name>')
             continue
         library1.find_book(input_text[1])
-    elif input_text[0] == 'help':
-        print('nope')
     elif input_text[0] == 'exit':
         print('bye bye')
+        library1.save_data()
         break
+    elif input_text[0] == 'import':
+        if len(input_text) != 2:
+            print('usage: import <file_name>')
+            continue        
+        library1.import_books(input_text[1])
+    elif input_text[0] == 'export':
+        if len(input_text) != 2:
+            print('usage: export <file_name>')
+            continue        
+        library1.export_books(input_text[1])   
+    elif input_text[0] == 'help':
+        print('''
+        list: see all books in the library
+        add-book <book name>: add book to the library
+        borrow <book name>: borrow book from the library
+        return <book name>: return book to the library
+        find <book name>: check if book is in the library
+        import <file name>: import books from file to the library
+        export <file name>: export books to file from the library 
+        exit: end of program
+        ''')    
     else:
         print('unknown command')
+    library1.save_data()
+    
         
     
