@@ -8,8 +8,6 @@ from library import Library, library1
 from loan import Loan
 from book import Book
 
-
-use = User('olek')
 library1.save_load()
         
 while True:
@@ -44,7 +42,7 @@ while True:
         library1.find_book(input_text[1])
     elif input_text[0] == 'exit':
         print('bye bye')
-        library1.savedata()
+        library1.save_data()
         break
     elif input_text[0] == 'import':
         if len(input_text) != 2:
