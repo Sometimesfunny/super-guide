@@ -1,6 +1,6 @@
 import json
-from book import Book
-from loan import Loan
+from models.book import Book
+from models.loan import Loan
 
 class Library:
     
