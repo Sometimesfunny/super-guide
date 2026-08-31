@@ -26,12 +26,12 @@ while True:
         if len(input_text) != 2:
             print('usage: borrow <book_name>')
             continue
-        library1.borrow_book(input('on who register book? '), input_text[1])
+        library1.borrow_book(input('on who register book? ').strip().lower(), input_text[1])
     elif input_text[0] == 'return':
         if len(input_text) != 2:
             print('usage: return <book_name>')
             continue
-        library1.return_book(input('on who register book? '), input_text[1])
+        library1.return_book(input('on who register book? ').strip().lower(), input_text[1])
     elif input_text[0] == 'find':
         if len(input_text) != 2:
             print('usage: find <book_name>')
