@@ -1,6 +1,6 @@
 import json
-from classBook import *
-from classLoan import *
+from book import Book
+from loan import Loan
 
 class Library:
     
@@ -8,7 +8,7 @@ class Library:
         self.book_list_: list[Book] = list()
         self.loans: set[Loan] = set()
 
-    def savedata(self):
+    def save_data(self):
         
         with open('library.json', 'w',) as json_file:
             json.dump({'books' : [x.name for x in self.book_list_], 'loans' : [{x.name : x.book_name} for x in self.loans]}, json_file)
@@ -30,7 +30,7 @@ class Library:
                             )   
                             library1.add_loan(loan)
         except FileNotFoundError:
-            print("no save was found")         
+            print("<no save was found>")         
          
     def book_list(self):
         print(self.book_list_)
@@ -53,7 +53,7 @@ class Library:
             if i.name == name:
                 loan_per_name += 1
         if loan_per_name >= 3:
-            print('   ')
+            print('you may not borrow more than 3 books')
             return
         
         new_loan = Loan(
@@ -86,14 +86,20 @@ class Library:
         self.loans.add(loan)
     
     def import_books(self, file):
-        with open(file, 'r') as f:
-            for i in f.read():
-                book_ = Book(i)
-                library1.add_book(book_)            
-            print('import successfully')
-            
+        try:
+            with open(file, 'r') as f:
+                for i in f.read().split(' ,'):
+                    book_ = Book(i)
+                    library1.add_book(book_)            
+                    print('import successfully')
+        except FileNotFoundError:
+            print('File not found')
     def export_books(self, file):
         with open(file, 'w') as f:
-            f.write(''.join([x.name for x in self.book_list_]))   
+            f.write(' ,'.join([x.name for x in self.book_list_]))   
             print('export successfully')
+
+
+            
 library1=Library()
+
